@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyLogTampering",
+      "Effect": "Deny",
+      "Action": [
+        "logs:DeleteDestination",
+        "logs:DeleteLogGroup",
+        "logs:DeleteLogStream",
+        "logs:DeleteMetricFilter",
+        "logs:DeleteSubscriptionFilter",
+        "logs:DeleteRetentionPolicy"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyAlarmAndRuleDisabling",
+      "Effect": "Deny",
+      "Action": [
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DisableAlarmActions",
+        "events:DeleteRule",
+        "events:DisableRule",
+        "events:RemoveTargets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

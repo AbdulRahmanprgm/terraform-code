@@ -1,0 +1,79 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyDisableCloudTrail",
+      "Effect": "Deny",
+      "Action": [
+        "cloudtrail:DeleteTrail",
+        "cloudtrail:DeleteEventDataStore",
+        "cloudtrail:DeleteTrailChannel",
+        "cloudtrail:StopLogging",
+        "cloudtrail:UpdateTrail"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyDisableConfig",
+      "Effect": "Deny",
+      "Action": [
+        "config:DeleteConfigRule",
+        "config:DeleteConfigurationRecorder",
+        "config:DeleteConformancePack",
+        "config:DeleteDeliveryChannel",
+        "config:DeleteOrganizationConfigRule",
+        "config:DeleteOrganizationConformancePack",
+        "config:DeleteRetentionConfiguration",
+        "config:StopConfigurationRecorder"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyDisableGuardDuty",
+      "Effect": "Deny",
+      "Action": [
+        "guardduty:DeleteDetector",
+        "guardduty:DeleteFilter",
+        "guardduty:DeleteIPSet",
+        "guardduty:DeleteInvitations",
+        "guardduty:DeleteMalwareProtectionPlan",
+        "guardduty:DeleteMembers",
+        "guardduty:DeletePublishingDestination",
+        "guardduty:DeleteThreatIntelSet",
+        "guardduty:DisassociateFromAdministratorAccount",
+        "guardduty:StopMonitoringMembers",
+        "guardduty:UpdateDetector"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyDisableSecurityHub",
+      "Effect": "Deny",
+      "Action": [
+        "securityhub:BatchDisableStandards",
+        "securityhub:DeleteActionTarget",
+        "securityhub:DeleteAutomationRule",
+        "securityhub:DeleteConfigurationPolicy",
+        "securityhub:DeleteFindingAggregator",
+        "securityhub:DeleteInsight",
+        "securityhub:DeleteInvitations",
+        "securityhub:DeleteMembers",
+        "securityhub:DisableOrganizationAdminAccount",
+        "securityhub:DisableSecurityHub",
+        "securityhub:DisassociateFromAdministratorAccount",
+        "securityhub:DisassociateMembers"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyDisableAccessAnalyzer",
+      "Effect": "Deny",
+      "Action": [
+        "access-analyzer:DeleteArchiveRule",
+        "access-analyzer:DeleteAnalyzer",
+        "access-analyzer:UpdateArchiveRule"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

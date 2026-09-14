@@ -1,0 +1,58 @@
+image:
+  name: hashicorp/terraform:1.14.0
+  entrypoint: [ "" ]
+
+stages:
+- plan
+- apply
+
+variables:
+  AWS_REGION: us-east-1
+
+.terraform_auth:
+  id_tokens:
+    AWS_OIDC_TOKEN:
+      aud: https://gitlab.com
+
+  before_script:
+  - apk add --no-cache curl jq aws-cli
+  - terraform --version
+
+  # Write the OIDC token to a file for AWS SDK and Terraform
+  - echo "${AWS_OIDC_TOKEN}" > /tmp/web_identity_token
+
+  # Set AWS environment variables for web identity
+  - export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/web_identity_token
+  - export AWS_ROLE_ARN="${ROLE_ARN}"
+  - export AWS_DEFAULT_REGION="${AWS_REGION}"
+
+  # Verify AWS authentication works
+  - aws sts get-caller-identity
+  # DO NOT DELETE the token file here - Terraform needs it!
+
+terraform_plan:
+  stage: plan
+  extends: .terraform_auth
+
+  script:
+  - terraform init
+  - terraform validate
+  - terraform plan
+
+  after_script:
+  # Clean up token file after job completes
+  - rm -f /tmp/web_identity_token || true
+
+terraform_apply:
+  stage: apply
+  extends: .terraform_auth
+
+  when: manual
+
+  script:
+  - terraform init
+  - terraform apply -auto-approve
+
+  after_script:
+  # Clean up token file after job completes
+  - rm -f /tmp/web_identity_token || true

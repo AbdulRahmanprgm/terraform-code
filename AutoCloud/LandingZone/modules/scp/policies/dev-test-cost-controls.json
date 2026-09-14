@@ -1,0 +1,59 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyHighCostAnalyticsAndAIPlatforms",
+      "Effect": "Deny",
+      "Action": [
+        "elasticmapreduce:RunJobFlow",
+        "es:CreateElasticsearchDomain",
+        "es:UpdateElasticsearchDomainConfig",
+        "opensearch:CreateDomain",
+        "opensearch:UpdateDomainConfig",
+        "redshift:CreateCluster",
+        "redshift:ModifyCluster",
+        "sagemaker:CreateApp",
+        "sagemaker:CreateAutoMLJob",
+        "sagemaker:CreateCompilationJob",
+        "sagemaker:CreateDomain",
+        "sagemaker:CreateEndpoint",
+        "sagemaker:CreateEndpointConfig",
+        "sagemaker:CreateHyperParameterTuningJob",
+        "sagemaker:CreateModel",
+        "sagemaker:CreateMonitoringSchedule",
+        "sagemaker:CreateNotebookInstance",
+        "sagemaker:CreateProcessingJob",
+        "sagemaker:CreateTrainingJob",
+        "sagemaker:CreateTransformJob"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyLargeAndAcceleratedInstances",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:StartInstances"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringLikeIfExists": {
+          "ec2:InstanceType": [
+            "*.metal",
+            "dl*",
+            "g4dn.*",
+            "g5*",
+            "g6*",
+            "gr6*",
+            "inf*",
+            "p*",
+            "trn*",
+            "u-*",
+            "x1*",
+            "x2*"
+          ]
+        }
+      }
+    }
+  ]
+}

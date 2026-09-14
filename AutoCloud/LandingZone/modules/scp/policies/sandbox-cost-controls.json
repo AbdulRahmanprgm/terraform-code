@@ -1,0 +1,54 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyExpensiveManagedPlatforms",
+      "Effect": "Deny",
+      "Action": [
+        "directconnect:*",
+        "elasticmapreduce:*",
+        "es:*",
+        "opensearch:*",
+        "redshift:*",
+        "sagemaker:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyNatGatewayCreation",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:CreateNatGateway"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyLargeAndAcceleratedInstances",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:StartInstances"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringLikeIfExists": {
+          "ec2:InstanceType": [
+            "*.metal",
+            "dl*",
+            "g4dn.*",
+            "g5*",
+            "g6*",
+            "gr6*",
+            "hpc*",
+            "inf*",
+            "p*",
+            "trn*",
+            "u-*",
+            "x1*",
+            "x2*"
+          ]
+        }
+      }
+    }
+  ]
+}

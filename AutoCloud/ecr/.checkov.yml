@@ -1,0 +1,2 @@
+skip-check:
+  - CKV_AWS_136 # ECR repositories intentionally use AES256 instead of KMS in this project.

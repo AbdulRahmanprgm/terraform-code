@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyEverythingExceptApprovedNetworkServices",
+      "Effect": "Deny",
+      "NotAction": "__NETWORK_ALLOWED_ACTIONS__",
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyIAMUsersGroupsAndAccessKeys",
+      "Effect": "Deny",
+      "Action": [
+        "iam:CreateUser",
+        "iam:DeleteUser",
+        "iam:UpdateUser",
+        "iam:CreateAccessKey",
+        "iam:UpdateAccessKey",
+        "iam:DeleteAccessKey",
+        "iam:CreateLoginProfile",
+        "iam:UpdateLoginProfile",
+        "iam:DeleteLoginProfile",
+        "iam:CreateGroup",
+        "iam:DeleteGroup",
+        "iam:AddUserToGroup",
+        "iam:RemoveUserFromGroup",
+        "iam:AttachUserPolicy",
+        "iam:DetachUserPolicy",
+        "iam:PutUserPolicy",
+        "iam:DeleteUserPolicy"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

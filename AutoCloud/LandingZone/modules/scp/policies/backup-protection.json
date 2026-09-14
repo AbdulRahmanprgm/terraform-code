@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyBackupDeletionAndVaultLockChanges",
+      "Effect": "Deny",
+      "Action": [
+        "backup:DeleteBackupPlan",
+        "backup:DeleteBackupSelection",
+        "backup:DeleteBackupVault",
+        "backup:DeleteBackupVaultAccessPolicy",
+        "backup:DeleteBackupVaultLockConfiguration",
+        "backup:DeleteRecoveryPoint",
+        "backup:PutBackupVaultLockConfiguration",
+        "backup:UpdateBackupPlan",
+        "backup:UpdateRecoveryPointLifecycle"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyFindingSuppressionAndDeletion",
+      "Effect": "Deny",
+      "Action": [
+        "guardduty:ArchiveFindings",
+        "guardduty:DeleteFilter",
+        "guardduty:UpdateFindingsFeedback",
+        "securityhub:BatchUpdateFindings",
+        "securityhub:DeleteActionTarget",
+        "securityhub:DeleteInsight"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
